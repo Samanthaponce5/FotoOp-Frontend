@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from './Header'
 import SignInForm from './SignInForm';
 import LoginForm from './LoginForm'
+import NavBar from './NavBar'
 
 
  class App extends React.Component{
-
   state = {
     user:{},
     form:''
@@ -49,28 +50,21 @@ import LoginForm from './LoginForm'
 
 
 
- renderForm = () => {
-    switch(this.state.form){
-      case "login":
-        return <LoginForm handleLogin={this.handleLogin}/>
-        break;
-      default:
-        return <SignInForm handleLogin={this.handleLogin}/>
-    }
-  }
-
   render(){
     console.log(this.state.user)
 
     return(
-      <div className="App">
-      <Header handleFormSwitch={this.handleFormSwitch}/>
-      {
-        this.renderForm()
-      }
-      <button onClick={this.handleAuthClick} className="ui button">Access Authorized Route</button>
-  </div>
+     <BrowserRouter>
+     <NavBar handleAuthClick={this.handleAuthClick}/>
+     <Switch>
 
+      <Route exact path='/' render={(props)=>(<LoginForm handleLogin={this.handleLogin}/>)}/> 
+      <Route exact path='/signup' render={(props)=>(<SignInForm handleLogin={this.handleLogin}/>)}/> 
+
+
+
+     </Switch>
+     </BrowserRouter>
     )
   }
 }
@@ -79,3 +73,10 @@ import LoginForm from './LoginForm'
 
 export default App;
 
+{/* <div className="App">
+<Header handleFormSwitch={this.handleFormSwitch}/>
+{
+  this.renderForm()
+}
+<button onClick={this.handleAuthClick} className="ui button">Access Authorized Route</button>
+</div> */}

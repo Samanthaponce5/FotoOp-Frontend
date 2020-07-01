@@ -1,10 +1,9 @@
 import React from 'react';
-import './App.css';
+import './Style/App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Header from './Header'
-import SignInForm from './SignInForm';
-import LoginForm from './LoginForm'
-import NavBar from './NavBar'
+import SignInForm from './Components/SignInForm';
+import LoginForm from './Components/LoginForm'
+import NavBar from './Components/NavBar'
 
 
  class App extends React.Component{
@@ -55,11 +54,11 @@ import NavBar from './NavBar'
 
     return(
      <BrowserRouter>
-     <NavBar handleAuthClick={this.handleAuthClick}/>
+     <NavBar />
      <Switch>
 
-      <Route exact path='/' render={(props)=>(<LoginForm handleLogin={this.handleLogin}/>)}/> 
-      <Route exact path='/signup' render={(props)=>(<SignInForm handleLogin={this.handleLogin}/>)}/> 
+      <Route exact path='/login' render={(props)=>(<LoginForm handleLogin={this.handleLogin} handleAuthClick={this.handleAuthClick}/>)}/> 
+      <Route exact path='/signup' render={(props)=>(<SignInForm handleLogin={this.handleLogin} handleAuthClick={this.handleAuthClick}/>)}/> 
 
 
 

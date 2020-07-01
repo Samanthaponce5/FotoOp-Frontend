@@ -1,4 +1,6 @@
 import React, {useState} from 'react'
+import { Link } from 'react-router-dom';
+
 
 function SignInForm(props) {
     const [username, setUsername] = useState("")
@@ -54,6 +56,9 @@ function SignInForm(props) {
                 
                 <button className="ui button" type="submit">Submit</button>
             </form>
+            <Link to="/login">Log in</Link>
+            <button onClick={props.handleAuthClick} className="ui button">Access Authorized Route</button>
+
         </div>
     )
 }

@@ -5,11 +5,11 @@
 }
 /* =====================For Navbar============================ */
 nav{
-   
     min-height: 8vh;
     width: 100%;
     background-color: #5d5d5d;
 }
+
 label.logo{
     color: white;
     text-transform: uppercase;
@@ -69,7 +69,7 @@ a.active, a:hover{
     .checkbtn{
         display: block;
     }
-    ul{
+    nav ul{
         position: fixed;
         width:  100%;
         height: 100vh;
@@ -91,7 +91,7 @@ a:hover, a.active{
     background: none;
     color: #0082e6;
 }
-#check:checked ~ ul{
+/* #check:checked ~ .nav-links{
     left: 0;
-}
+} */
 }

@@ -7,34 +7,50 @@ import '../Style/App.css';
 
 
 export default class NavBar extends React.Component{
+	handleClick=(e)=>{
+		if (e.target.className === 'link'){
+			document.querySelector('.nav-links').style.left = '-100%'
+			document.getElementById('check').checked = false
+
+		}
+	}
+
+	handleCheck=(e)=>{
+		if(e.target.checked === true){
+			document.querySelector('.nav-links').style.left = '0'
+		}else{
+			document.querySelector('.nav-links').style.left = '-100%'
+
+		}
+	}
     render(){
         return(
             <>
             <nav >
 
-				<input type="checkbox" id='check'/>
+				<input type="checkbox" id='check' onClick={this.handleCheck}/>
 				<label htmlFor='check' className='checkbtn'>
 				<FontAwesomeIcon icon={faBars} />
 				</label>
 				<label className="logo">InstaReact</label>
 
-					<ul className='nav-links'>
-						<li className="homeLink">
-							<Link to="/">About</Link>
+					<ul className='nav-links' >
+						<li>
+							<Link className="link" onClick={this.handleClick} to="/">About</Link>
 						</li>
-
-						<li className="sellContentLink">
-							<Link to="/home">Home</Link>
+ 
+						<li>
+							<Link className="link" onClick={this.handleClick} to="/home">Home</Link>
 						</li>
 					
-						<li className='cartlink'>
+						<li>
       
-							<Link to="/cart">Cart</Link>
+							<Link className="link" onClick={this.handleClick} to="/cart">Cart</Link>
 						</li>
 		
 						
-							<li className='loglink'>
-								<Link to="/login">Login</Link>
+							<li>
+								<Link className="link" onClick={this.handleClick} to="/login">Login</Link>
 								
 							</li>
 						

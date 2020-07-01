@@ -1,14 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import './App.css';
 import Header from './Header'
 import SignInForm from './SignInForm';
 import LoginForm from './LoginForm'
 
-function App() {
-  const [user, setUser] = useState({})
-  const [form, setForm] = useState("")
 
-  useEffect(() => {
+ class App extends React.Component{
+
+  state = {
+    user:{},
+    form:''
+  }
+
+  componentDidMount(){
     const token = localStorage.getItem("token")
     if(token){
       fetch(`http://localhost:3000/auto_login`, {
@@ -18,21 +22,21 @@ function App() {
       })
       .then(resp => resp.json())
       .then(data => {
-        setUser(data)
+        this.setState({user:data})
         // console.log(data)
       })
     }
-  }, [])
-
-  const handleLogin = (user) => {
-    setUser(user)
   }
 
-  const handleFormSwitch = (input) => {
-    setForm(input)
+ handleLogin = (user) => {
+    this.setState({user})
   }
 
-  const handleAuthClick = () => {
+ handleFormSwitch = (input) => {
+    this.setState({form:input})
+  }
+
+ handleAuthClick = () => {
     const token = localStorage.getItem("token")
     fetch(`http://localhost:3000/user_is_authed`, {
       headers: {
@@ -43,27 +47,35 @@ function App() {
     .then(data => console.log(data))
   }
 
-  console.log(user)
 
-  const renderForm = () => {
-    switch(form){
+
+ renderForm = () => {
+    switch(this.state.form){
       case "login":
-        return <LoginForm handleLogin={handleLogin}/>
+        return <LoginForm handleLogin={this.handleLogin}/>
         break;
       default:
-        return <SignInForm handleLogin={handleLogin}/>
+        return <SignInForm handleLogin={this.handleLogin}/>
     }
   }
-  return (
-    <div className="App">
-        <Header handleFormSwitch={handleFormSwitch}/>
-        {
-          renderForm()
-        }
-        <button onClick={handleAuthClick} className="ui button">Access Authorized Route</button>
-    </div>
-  );
+
+  render(){
+    console.log(this.state.user)
+
+    return(
+      <div className="App">
+      <Header handleFormSwitch={this.handleFormSwitch}/>
+      {
+        this.renderForm()
+      }
+      <button onClick={this.handleAuthClick} className="ui button">Access Authorized Route</button>
+  </div>
+
+    )
+  }
 }
+
+
 
 export default App;
 

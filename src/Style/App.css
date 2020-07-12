@@ -3,15 +3,24 @@
     padding: 0px;
     box-sizing: border-box;
 }
+
+body{
+    background-color: #fafafa;
+}
 /* =====================For Navbar============================ */
 nav{
-    min-height: 8vh;
+    position: fixed;
+    /* min-height: 2vh; */
+    height: 65px;
     width: 100%;
-    background-color: #5d5d5d;
+    /* height: 20%; */
+    background-color: #ffffff;
+    border-bottom: 1px solid rgba(var(--b6a,219,219,219),1);
+    z-index: 3;
 }
 
 label.logo{
-    color: white;
+    color: black;
     text-transform: uppercase;
     line-height: 80px;
     padding: 0 100px;
@@ -30,7 +39,7 @@ nav ul li{
 }
 
 nav ul li a{
-    color: white;
+    color: black;
     font-size: 17px;
     text-transform: uppercase;
     padding: 7px 13px;
@@ -43,7 +52,7 @@ a.active, a:hover{
 
 .checkbtn{
     font-size: 30px;
-    color: white;
+    color: black;
     float: right;
     line-height: 80px;
     margin-right: 40px;
@@ -94,4 +103,51 @@ a:hover, a.active{
 /* #check:checked ~ .nav-links{
     left: 0;
 } */
+}
+
+/* ========================================= PROFILE PAGE==================================================================================== */
+.profileContainer{
+    /* border: solid black; */
+    width: 80%;
+    position: absolute;
+	top:110px;
+	/* bottom: 0; */
+	left: 15%;
+	right: 15%;
+   /* margin-left: auto;
+   margin-right: auto; */
+   
+}
+.pictureContainer{
+    /* border: solid red; */
+    position: relative;
+    top: 70px;
+}
+.hr{
+    border-top: 1px solid rgba(var(--b38,219,219,219),1);
+    left: 0;
+	right: 0;
+    margin: auto;
+  width: 95%;
+}
+
+.pictureContainer{
+    top: 1%;
+  
+    
+}
+
+.feedImg{
+    border: .5px solid rgba(0, 0, 0, 0.568);
+    object-fit: cover;
+    width: 20vw;
+    height: 20vw;
+      margin: 1em ;
+
+
+}
+/* for the upload form */
+.pictures_container{
+    position: absolute;
+    top: 20%;
 }

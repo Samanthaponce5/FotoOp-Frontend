@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import SignInForm from './Components/SignInForm';
 import LoginForm from './Components/LoginForm'
 import NavBar from './Components/NavBar'
+import Feed from './Components/Feed';
+import Profile from './Components/Profile';
 
 
  class App extends React.Component{
@@ -48,17 +50,24 @@ import NavBar from './Components/NavBar'
   }
 
 
+  logout = () => {
+      localStorage.clear();
+  }
+
+ 
 
   render(){
     console.log(this.state.user)
 
     return(
      <BrowserRouter>
-     <NavBar />
+     <NavBar {...this.props} logout={this.logout}/>
      <Switch>
 
       <Route exact path='/login' render={(props)=>(<LoginForm handleLogin={this.handleLogin} handleAuthClick={this.handleAuthClick}/>)}/> 
       <Route exact path='/signup' render={(props)=>(<SignInForm handleLogin={this.handleLogin} handleAuthClick={this.handleAuthClick}/>)}/> 
+      <Route exact path='/post' render={(props)=>(<Feed {...this.state} />)}/> 
+      <Route exact path='/profile' render={(props)=>(<Profile {...this.state} />)}/> 
 
 
 
@@ -72,10 +81,10 @@ import NavBar from './Components/NavBar'
 
 export default App;
 
-{/* <div className="App">
+/* <div className="App">
 <Header handleFormSwitch={this.handleFormSwitch}/>
 {
   this.renderForm()
 }
 <button onClick={this.handleAuthClick} className="ui button">Access Authorized Route</button>
-</div> */}
+</div> */

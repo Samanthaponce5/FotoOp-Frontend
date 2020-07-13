@@ -23,22 +23,36 @@ export default class Profile extends React.Component{
           })
         }
       }
+     
+       handleClick=(e)=>{
+          this.props.routerProps.history.push('/edit')
+        }
 
     render(){
-        console.log(this.props)
+        console.log(this.props.routerProps.history)
         return(
             <div className='profileContainer'>
-                <div >
-        <h1>{this.props.user.username}</h1>
+                <div className='bioSection'>
+       <ul className='username'> <li><h1>{this.props.user.username}</h1></li> <li><button onClick={this.handleClick} className='editButton'>Edit Profile</button></li></ul>
+
+
             <ul className='stats'>
-            <li>50 posts</li>
-           <li>215 followers</li> 
-            <li>147 following</li>
+             <li><b>50</b> posts</li>
+             <li><b>215</b> followers</li> 
+             <li><b>147</b> following</li>
             </ul>
-                </div>
+            <div className='name'> Samantha Ponce</div>
+            <div className='bio'>
+              ✝️💙 God's timing is always perfect💙✝️<br/>
+              👩‍💻Software Engineer<br/>
+              📷🌎✈🐶🐶</div>
+
+         </div>
             <div className='hr'></div><br/>
             <div className='pictureContainer'>
-            {this.state.pictures.map((picture)=>{ return <ProfileFeed key={picture.id} pictures={picture.attachment_url} />})}
+               
+            {this.state.pictures.map((picture)=>{ return <ProfileFeed key={picture.id} pictures={picture.attachment_url} routerProps={this.props.routerProps} />})}
+            
             </div>
              </div>
         )

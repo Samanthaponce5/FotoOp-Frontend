@@ -6,7 +6,11 @@ import LoginForm from './Components/LoginForm'
 import NavBar from './Components/NavBar'
 import Feed from './Components/Feed';
 import Profile from './Components/Profile';
+import { createBrowserHistory } from "history"
+import Landing from './Components/Landing';
+import Edit from './Components/Edit';
 
+const history = createBrowserHistory()
 
  class App extends React.Component{
   state = {
@@ -52,6 +56,7 @@ import Profile from './Components/Profile';
 
   logout = () => {
       localStorage.clear();
+      this.setState({user:{}})
   }
 
  
@@ -60,14 +65,20 @@ import Profile from './Components/Profile';
     console.log(this.state.user)
 
     return(
-     <BrowserRouter>
-     <NavBar {...this.props} logout={this.logout}/>
+     <BrowserRouter >
+     
+     <NavBar history={history} {...this.state} logout={this.logout}/>
      <Switch>
-
+      <Route exact path='/' render={(props)=>(<Landing />)}/> 
       <Route exact path='/login' render={(props)=>(<LoginForm handleLogin={this.handleLogin} handleAuthClick={this.handleAuthClick}/>)}/> 
       <Route exact path='/signup' render={(props)=>(<SignInForm handleLogin={this.handleLogin} handleAuthClick={this.handleAuthClick}/>)}/> 
+      {this.state.user.username ?(
+        <>
       <Route exact path='/post' render={(props)=>(<Feed {...this.state} />)}/> 
-      <Route exact path='/profile' render={(props)=>(<Profile {...this.state} />)}/> 
+      <Route exact path='/edit' render={(props)=>(<Edit {...this.state}  />)}/> 
+      <Route exact path='/profile' render={(props)=>(<Profile {...this.state} routerProps={props} />)}/> </>) : (<h1 className='notfound'>Page Not Found</h1>)
+
+  }
 
 
 

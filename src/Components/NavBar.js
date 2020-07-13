@@ -20,7 +20,8 @@ export default class NavBar extends React.Component{
 	
 
 	handleClick=(e)=>{
-		if (e.target.className === 'link'){
+		if (e.target.className === "link home" || "link upload" || "link logout" || "link profile" || "link login"){
+			console.log(e.target)
 			document.querySelector('.nav-links').style.left = '-100%'
 			document.getElementById('check').checked = false
 
@@ -36,13 +37,13 @@ export default class NavBar extends React.Component{
 		}
 	}
 
-	handleLogout = (e) => {
-		e.preventDefault();
+	handleLogout = () => {
 		this.props.logout();
-		console.log('?')
-		// this.props.history.push('/')
+		this.props.history.push('/')
+		// console.log('logged out')
 	  }
     render(){
+		console.log(this.props.user)
         return(
             <>
             <nav >
@@ -54,27 +55,25 @@ export default class NavBar extends React.Component{
 				<label className="logo">InstaReact</label>
 
 					<ul className='nav-links' >
-					<li>
-							<Link style={{color: this.state.color}} className="link home" onClick={this.handleClick} to="/home"><RiHome2Line size={30}/></Link>
+					
+						{this.props.user.username ?(
+							<>
+						<li>
+							<Link style={{color: this.state.color}} className="link home" onClick={this.handleClick} to="/home"><RiHome2Line  size={30}/></Link>
 						</li>
 						
 						<li>
-							<Link style={{color: this.state.color}} className="link post" onClick={this.handleClick} to="/post"><BsUpload size={30}/></Link>
+							<Link style={{color: this.state.color}} className="link upload" onClick={this.handleClick} to="/post"><BsUpload size={30}/></Link>
 						</li>
  
-					
-					
-						<li style={{color: this.state.color}} className="link logout" onClick={this.handleLogout}><AiOutlineLogout size={30}/></li>
-
 						<li>
 							<Link style={{color: this.state.color}} className="link profile" onClick={this.handleClick} to="/profile"><AiOutlineUser size={30}/></Link>
 						</li>
+						<li ><Link style={{color: this.state.color}} className="link logout" onClick={this.handleLogout} to="/"><AiOutlineLogout size={30}/></Link></li> </>):(
+
 						
-							<li>
-								<Link style={{color: this.state.color}} className="link login" onClick={this.handleClick} to="/login"><AiOutlineLogin size={30}/></Link>
-								
-							</li>
-						
+						<li><Link style={{color: this.state.color}} className="link login" onClick={this.handleClick} to="/login"><AiOutlineLogin size={30}/></Link></li>
+						)}
 					</ul>
 					<div className='burger'>
 						<div className='line1'></div>

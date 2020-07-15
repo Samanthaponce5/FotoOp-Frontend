@@ -73,6 +73,8 @@ export default class ProfileFeed extends React.Component{
             ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
              dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
              nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+             t aliquip ex ea commodo consequat. Duis aute irure
+             dolor in reprehenderit in voluptate velit esse 
               </div> 
           <div className='bottomhr'><ul className='likesandcomments'>
              <li><IoIosHeartEmpty size={30}/> </li> <li><FaRegComment size={25}/> </li></ul>

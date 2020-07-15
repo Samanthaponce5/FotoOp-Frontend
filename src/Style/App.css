@@ -173,7 +173,7 @@ nav ul li a{
 }
 
 .feedImg{
-    border: .5px solid rgba(0, 0, 0, 0.568);
+    /* border: .5px solid rgba(0, 0, 0, 0.568); */
     object-fit: cover;
     width: 20vw;
     height: 20vw;
@@ -204,6 +204,7 @@ margin-bottom: 10%;
     text-align: center;
     color: white;
     /* border:solid black; */
+pointer-events:none ;
 }
 .number{
     position: relative;
@@ -220,6 +221,11 @@ ul.text li{
     -o-transition: all 1s ease;
     -ms-transition: all 1s ease;
     transition: all 1s ease;
+
+    -webkit-transform: scale(1.2);
+-ms-transform: scale(1.2);
+transform: scale(1.2);
+transition: 1s ease;
     
 }
 
@@ -278,6 +284,94 @@ ul.username li{
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%)
+}
+/* modal pop up */
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 5; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.541); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.555); /* Black w/ opacity */
+  }
+  
+  /* Modal Content (image) */
+  .modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+  }
+  
+  /* Caption of Modal Image */
+  #caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+  }
+  
+  /* Add Animation */
+  .modal-content, #caption {  
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+  }
+  
+  @-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)} 
+    to {-webkit-transform:scale(1)}
+  }
+  
+  @keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+  }
+  
+  /* The Close Button */
+  .close {
+    position: absolute;
+    top: 90px;
+    right: 40px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  /* 100% Image Width on Smaller Screens */
+  @media only screen and (max-width: 700px){
+    .modal-content {
+      width: 100%;
+    }
+  }
+
+/* Upload avatar form */
+.productForm{
+    /* border: solid; */
+    position: absolute;
+  top: 25vh;
+  left: 25vw;
 }
 
  @media (max-width: 952px){

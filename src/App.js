@@ -34,8 +34,8 @@ const history = createBrowserHistory()
     }
   }
 
- handleLogin = (user) => {
-    this.setState({user})
+ handleLogin = (data) => {
+    this.setState({user:data})
   }
 
  handleFormSwitch = (input) => {
@@ -59,10 +59,12 @@ const history = createBrowserHistory()
       this.setState({user:{}})
   }
 
+
+
  
 
   render(){
-    console.log(this.state.user)
+    // console.log(this.state.user)
 
     return(
      <BrowserRouter >
@@ -70,13 +72,13 @@ const history = createBrowserHistory()
      <NavBar history={history} {...this.state} logout={this.logout}/>
      <Switch>
       <Route exact path='/' render={(props)=>(<Landing />)}/> 
-      <Route exact path='/login' render={(props)=>(<LoginForm handleLogin={this.handleLogin} handleAuthClick={this.handleAuthClick}/>)}/> 
+      <Route exact path='/login' render={(props)=>(<LoginForm handleLogin={this.handleLogin} handleAuthClick={this.handleAuthClick} routerProps={props}/>)}/> 
       <Route exact path='/signup' render={(props)=>(<SignInForm handleLogin={this.handleLogin} handleAuthClick={this.handleAuthClick}/>)}/> 
       {this.state.user.username ?(
         <>
       <Route exact path='/post' render={(props)=>(<Feed {...this.state} />)}/> 
       <Route exact path='/edit' render={(props)=>(<Edit {...this.state}  />)}/> 
-      <Route exact path='/profile' render={(props)=>(<Profile {...this.state} routerProps={props} />)}/> </>) : (<h1 className='notfound'>Page Not Found</h1>)
+      <Route exact path='/profile' render={(props)=>(<Profile {...this.state}  routerProps={props} />)}/> </>) : (<h1 className='notfound'>Page Not Found</h1>)
 
   }
 

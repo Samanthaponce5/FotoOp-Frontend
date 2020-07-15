@@ -30,7 +30,8 @@ function LoginForm(props){
         .then(resp => resp.json())
         .then(data => {
             localStorage.setItem("token", data.jwt)
-            props.handleLogin(data.user)
+            props.handleLogin(data)
+            props.routerProps.history.push('/profile')
         })
         setUsername("")
         setPassword("")
@@ -40,6 +41,7 @@ function LoginForm(props){
         padding: "20px",
         width: "80%"
     }
+   
     return(
         <div>
             <div style={formDivStyle}>

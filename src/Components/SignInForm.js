@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 function SignInForm(props) {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+
 
     const handleUsernameChange = (evt) => {
         setUsername(evt.target.value)
@@ -36,15 +39,22 @@ function SignInForm(props) {
         setPassword("")
     }
     const formDivStyle = {
+        position:'absolute',
         margin: "auto",
         padding: "20px",
-        width: "80%"
+        width: "80%",
+        top:'40%'
     }
+
+  
     
     return(
         <div style={formDivStyle}>
             <h1>Sign Up</h1>
             <form className="ui form" onSubmit={handleSubmit}>
+            <input className='name' placeholder='Name' type='text' name='name' value={name} onChange={"handleOnChange"} /><br />
+            <input className='email' type='text' placeholder='Email' name='email' value={email} onChange={"handleOnChange"} /><br />
+
                 <div className="field">
                     <label>Username</label>
                     <input value={username} onChange={handleUsernameChange} type="text" placeholder="username"/>
@@ -53,7 +63,8 @@ function SignInForm(props) {
                     <label>Password</label>
                     <input value={password} onChange={handlePasswordChange} type="password" placeholder="password"/>
                 </div>
-                
+                <input className='filebtn' type='file' name='image' onChange={'handleOnChange'} /><br />
+
                 <button className="ui button" type="submit">Submit</button>
             </form>
             <Link to="/login">Log in</Link>

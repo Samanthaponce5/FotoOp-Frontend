@@ -51,7 +51,7 @@ export default class Profile extends React.Component{
             <div className='hr'></div><br/>
             <div className='pictureContainer'>
                
-            {this.state.pictures.map((picture)=>{ return <ProfileFeed key={picture.id} pictures={picture.attachment_url} id={picture.id} routerProps={this.props.routerProps} />})}
+            {this.state.pictures.map((picture)=>{ return <ProfileFeed key={picture.id} username={this.props.user.username} pictures={picture.attachment_url} id={picture.id} routerProps={this.props.routerProps} />})}
             
             </div>
              </div>

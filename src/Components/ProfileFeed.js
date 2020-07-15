@@ -1,7 +1,10 @@
 import React from 'react'
 import { ApiHost } from '../constants'
 import {FaComment} from 'react-icons/fa';
+import {FaRegComment} from 'react-icons/fa';
+
 import {IoIosHeart} from 'react-icons/io';
+import {IoIosHeartEmpty} from 'react-icons/io';
 
 export default class ProfileFeed extends React.Component{
 
@@ -52,9 +55,33 @@ export default class ProfileFeed extends React.Component{
         </div>
         </span> 
 
-        <div id="myModal" class="modal" >
-  <span onClick={this.handlespanClick} class="close">&times;</span>
-  <img src={`${ApiHost}${this.state.picture}`} class="modal-content" id="img01"/>
+        <div id="myModal" className="modal" >
+  <span onClick={this.handlespanClick} className="close">&times;</span>
+  <div className='background'>
+  <img src={`${ApiHost}${this.state.picture}`} className="modal-content" id="img01"/>
+  <div className='comments'>
+    
+        <div className='tophr'><div className='usernameModal'>{this.props.username}</div></div>
+         <div className='centerComment'>Super long comment to test the scrollability Lorem ipsum dolor sit amet,
+           consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore e
+           t dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+             dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
+             nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+              culpa qui officia deserunt mollit anim id est laborum.
+              t dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+             dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
+             nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+              </div> 
+          <div className='bottomhr'><ul className='likesandcomments'>
+             <li><IoIosHeartEmpty size={30}/> </li> <li><FaRegComment size={25}/> </li></ul>
+            <div className='likers'>Liked by 49 others  </div>
+            <div className='date'> MAY 30</div>
+          </div>
+          <input className='modalcomment' type='text' name='comment' placeholder='Add a comment...'/>
+  </div>
+  </div>
   <div id="caption"></div>
 </div>
         </> 

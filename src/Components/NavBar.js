@@ -56,7 +56,7 @@ export default class NavBar extends React.Component{
 
 					<ul className='nav-links' >
 					
-						{this.props.user.username ?(
+						{this.props.user.username ? (
 							<>
 						<li>
 							<Link style={{color: this.state.color}} className="link home" onClick={this.handleClick} to="/home"><RiHome2Line  size={30}/></Link>

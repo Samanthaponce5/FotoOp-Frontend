@@ -31,7 +31,7 @@ function LoginForm(props){
         .then(data => {
             localStorage.setItem("token", data.jwt)
             props.handleLogin(data)
-            props.routerProps.history.push('/profile')
+            props.routerProps.history.push('/home')
         })
         setUsername("")
         setPassword("")

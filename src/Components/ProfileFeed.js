@@ -10,7 +10,8 @@ export default class ProfileFeed extends React.Component{
 
 
     state={
-      picture:''
+      picture:'',
+      like:false
     }
   // Get the image and insert it inside the modal - use its "alt" text as a caption
  img = document.getElementById("feedImg");
@@ -43,6 +44,13 @@ export default class ProfileFeed extends React.Component{
    const modal = document.getElementById("myModal");
 
     modal.style.display = "none";
+  }
+
+  handleLike=(e)=>{
+ //give each li an id of the picture
+ // and do and if statement if the 
+ //li == the id like only that one heart
+    this.setState({like:!this.state.like})
   }
     render(){
       // Get the modal
@@ -77,7 +85,7 @@ export default class ProfileFeed extends React.Component{
              dolor in reprehenderit in voluptate velit esse 
               </div> 
           <div className='bottomhr'><ul className='likesandcomments'>
-             <li><IoIosHeartEmpty size={30}/> </li> <li><FaRegComment size={25}/> </li></ul>
+        {this.state.like ? <li style={{color: 'red'}} onClick={this.handleLike}><IoIosHeart size={30}/></li> : <li  onClick={this.handleLike} ><IoIosHeartEmpty size={30}/> </li> }<li><FaRegComment size={25}/> </li></ul>
             <div className='likers'>Liked by 49 others  </div>
             <div className='date'> MAY 30</div>
           </div>

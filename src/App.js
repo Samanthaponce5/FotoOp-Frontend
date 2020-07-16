@@ -9,6 +9,7 @@ import Profile from './Components/Profile';
 import { createBrowserHistory } from "history"
 import Landing from './Components/Landing';
 import Edit from './Components/Edit';
+import HomePage from './Components/HomePage';
 
 const history = createBrowserHistory()
 
@@ -76,6 +77,7 @@ const history = createBrowserHistory()
       <Route exact path='/signup' render={(props)=>(<SignInForm handleLogin={this.handleLogin} handleAuthClick={this.handleAuthClick}/>)}/> 
       {this.state.user.username ?(
         <>
+      <Route exact path='/home' render={(props)=>(<HomePage />)}/> 
       <Route exact path='/post' render={(props)=>(<Feed {...this.state} />)}/> 
       <Route exact path='/edit' render={(props)=>(<Edit {...this.state}  />)}/> 
       <Route exact path='/profile' render={(props)=>(<Profile {...this.state}  routerProps={props} />)}/> </>) : (<h1 className='notfound'>Page Not Found</h1>)

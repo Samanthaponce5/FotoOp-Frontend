@@ -311,7 +311,7 @@ ul.username li{
     /* margin: auto; */
     display: block;
     object-fit: cover;
-    width: 90%;
+    width: 50vw;
     max-width: 700px;
     object-fit: scale-down;
     height: 450px;
@@ -455,6 +455,69 @@ top: 15px;
     position: absolute;
   top: 25vh;
   left: 25vw;
+}
+/* Home page image */
+.homefeedImg{
+    position: relative;
+    width: 40%;
+    left: 17%;
+    width: 580px;
+
+    left: 12%;
+    
+}
+.homeimgdiv{
+    position: relative;
+    top: 100px;
+    padding-bottom: 70px;
+
+}
+.tophomeimg{
+    position: relative;
+    border: solid red;
+    height: 65px;
+    width: 40%;
+    left: 17%;
+    background-color: white;
+    border: .1px solid rgba(128, 128, 128, 0.315);
+    width: 580px;
+
+    left: 12%;
+}
+.bottomhomeimg{
+    position: relative;
+    border: solid red;
+    height: 255px;
+    width: 40%;
+    left: 17%;
+    background-color: white;
+    border: .1px solid rgba(128, 128, 128, 0.336);
+    top: -4px;
+    width: 580px;
+    left: 12%;
+}
+.homeimginput{
+    position: relative;
+    /* top: 113px; */
+    height: 50px;
+    width: 575px;
+
+    border: none;
+    border-top: .1px solid rgba(128, 128, 128, 0.315);
+}
+.homecenterComment{
+    /* border: solid red; */
+    position: relative;
+    height: 120px;
+    width: 550px;
+
+    left: 5%;
+    overflow: scroll;
+}
+.homedate{
+    position: relative;
+    left: 5%;
+    /* top: 100px; */
 }
 
  @media (max-width: 952px){

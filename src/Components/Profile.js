@@ -18,7 +18,7 @@ export default class Profile extends React.Component{
           })
           .then(resp => resp.json())
           .then(data => {
-            this.setState({pictures:data})
+            this.setState({pictures:data.posts})
             // console.log(data.posts)
           })
         }

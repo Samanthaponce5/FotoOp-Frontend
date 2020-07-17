@@ -13,27 +13,39 @@ export default class Home extends React.Component{
       number_columns: 4,
       loading: true,
       user_id:'',
-      like:false
+      like:false,
+      user:[]
     }
   
   
   componentDidMount() {
     this.loadPictures()
-
+    this.fetchUser()
   }
   
   loadPictures=()=> {
     fetch(`${ApiHost}/pictures.json`)
       .then((response) => response.json())
       .then((pictures) =>
-      
+    //   console.log(pictures)
         this.setState({
           pictures: pictures,
           loading: false
         })
   
       )
+
+      
   }
+
+  fetchUser=(id)=>{
+    fetch(`${ApiHost}/users`)
+    .then((resp)=>resp.json())
+    .then((data)=> this.setState({user:data}))
+
+   
+  }
+
   
   handleLike=(e)=>{
     //give each li an id of the picture
@@ -43,7 +55,13 @@ export default class Home extends React.Component{
      }
   
   
-  
+  getUser=(pic)=>{
+     return this.state.user.map((u)=>{
+          if(u.id === pic.user_id){
+              return <h3>{u.username}</h3>
+          }
+      })
+  }
   
 //   pictureRows() {
 //     let rows = []
@@ -65,9 +83,9 @@ export default class Home extends React.Component{
         return(
             <>
              <div>
-          {this.state.pictures.map((picture, columnIndex) =>
-            <div className='homeimgdiv'>
-                <div className='tophomeimg'></div>
+          {this.state.pictures.map((picture) =>
+            <div key={picture.id} className='homeimgdiv'>
+                <div className='tophomeimg'><h3 className='names'> {this.getUser(picture)}</h3></div>
               <img className='homefeedImg' data-id={picture.id} src={`${ApiHost}${picture.attachment_url}`} />
               <div className='bottomhomeimg'>
               <ul className='likesandcomments'>

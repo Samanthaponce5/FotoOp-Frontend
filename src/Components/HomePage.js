@@ -58,7 +58,7 @@ export default class Home extends React.Component{
   getUser=(pic)=>{
      return this.state.user.map((u)=>{
           if(u.id === pic.user_id){
-              return <h3>{u.username}</h3>
+              return u.username
           }
       })
   }

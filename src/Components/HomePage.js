@@ -58,7 +58,7 @@ export default class Home extends React.Component{
   getUser=(pic)=>{
      return this.state.user.map((u)=>{
           if(u.id === pic.user_id){
-              return u.username
+              return <span onClick={()=>this.props.visitUserProfile(u.id)} id={u.id}>{u.username}</span> 
           }
       })
   }
@@ -79,13 +79,14 @@ export default class Home extends React.Component{
 //     return rows
 //   }
 
+
     render(){
         return(
             <>
              <div>
           {this.state.pictures.map((picture) =>
             <div key={picture.id} className='homeimgdiv'>
-                <div className='tophomeimg'><h3 className='names'> {this.getUser(picture)}</h3></div>
+                <div className='tophomeimg'><h3 className='names'  > {this.getUser(picture)}</h3></div>
               <img className='homefeedImg' data-id={picture.id} src={`${ApiHost}${picture.attachment_url}`} />
               <div className='bottomhomeimg'>
               <ul className='likesandcomments'>

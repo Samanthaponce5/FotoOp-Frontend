@@ -388,6 +388,12 @@ ul.username li {
 	border-bottom: none;
 }
 
+.threedots{
+position: relative;
+float: right;
+padding-right: 25px;
+}
+
 ul.likesandcomments li {
 	position: relative;
 	display: inline-block;

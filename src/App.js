@@ -10,14 +10,17 @@ import { createBrowserHistory } from "history"
 import Landing from './Components/Landing';
 import Edit from './Components/Edit';
 import HomePage from './Components/HomePage';
+import VisitProfile from './Components/VisitProfile';
 
-const history = createBrowserHistory()
+
+const history = createBrowserHistory({forceRefresh:true})
 
  class App extends React.Component{
   state = {
     user:{},
     form:'',
-    users:[]
+    users:[],
+    visitUser:[]
   }
 
   componentDidMount(){
@@ -37,11 +40,9 @@ const history = createBrowserHistory()
 
   }
 
-  // allUsers=()=>{
-  //   fetch('http://localhost:3000/users')
-  //   .then((resp)=>resp.json())
-  //   .then((data)=>this.setState({users:data}))
-  // }
+ 
+  
+  
 
   // trying to get the list pf users but doesnt show up on the page
   handleUserSearch=(e)=>{
@@ -106,7 +107,18 @@ const history = createBrowserHistory()
       this.setState({user:{}})
   }
 
+visitUserProfile=(id)=>{
+  console.log('step one')
+  fetch(`http://localhost:3000/visit/${id}`)
+  .then((resp)=>resp.json())
+  .then((data)=>
+  console.log(data)
+    // this.setState({visitUser:data})
+)
+  
+  // history.push(`/visit/samantha`)
 
+}
 
  
 
@@ -115,14 +127,16 @@ const history = createBrowserHistory()
     return(
      <BrowserRouter >
      
-     <NavBar history={history} {...this.state} logout={this.logout} handleUserSearch={this.handleUserSearch}/>
+     <NavBar history={history} {...this.state} logout={this.logout} handleUserSearch={this.handleUserSearch} visitUserProfile={this.visitUserProfile}/>
      <Switch>
       <Route exact path='/' render={(props)=>(<Landing />)}/> 
       <Route exact path='/login' render={(props)=>(<LoginForm handleLogin={this.handleLogin} handleAuthClick={this.handleAuthClick} routerProps={props}/>)}/> 
       <Route exact path='/signup' render={(props)=>(<SignInForm handleLogin={this.handleLogin} handleAuthClick={this.handleAuthClick}/>)}/> 
       {/* {this.state.user.username ?(
         <> */}
-      <Route exact path='/home' render={(props)=>(<HomePage />)}/> 
+      <Route exact path='/home' render={(props)=>(<HomePage visitUserProfile={this.visitUserProfile}/>)}/> 
+      <Route exact path='/visit/:username' render={(props)=>(<VisitProfile {...this.state} />)}/> 
+
       <Route exact path='/post' render={(props)=>(<Feed {...this.state} />)}/> 
       <Route exact path='/edit' render={(props)=>(<Edit {...this.state}  />)}/> 
       <Route exact path='/profile' render={(props)=>(<Profile {...this.state}  routerProps={props} />)}/>

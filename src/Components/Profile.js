@@ -23,6 +23,35 @@ export default class Profile extends React.Component{
           })
         }
       }
+
+      handleDeletePic=(e)=>{
+        let id =  e.currentTarget.id
+    
+        fetch(`http://localhost:3000/pictures/${id}`, {
+                 method: 'DELETE'
+          })
+          .then(()=>{
+            const modal = document.getElementById("myModal");
+            modal.style.display = "none";
+
+            const token = localStorage.getItem("token")
+            if(token){
+              fetch(`http://localhost:3000/profile`, {
+                headers: {
+                  Authorization: `Bearer ${token}`
+                }
+              })
+              .then(resp => resp.json())
+              .then(data => {
+                this.setState({pictures:data.posts})
+                // console.log(data.posts)
+              })
+              .then(()=>{
+                this.state.pictures.map((picture)=>{ return <ProfileFeed key={picture.id} username={this.props.user.username} pictures={picture.attachment_url} id={picture.id} routerProps={this.props.routerProps} handleDeletePic={this.handleDeletePic} />})
+              })
+            }
+          })
+      }
      
        handleClick=(e)=>{
           this.props.routerProps.history.push('/edit')
@@ -51,7 +80,7 @@ export default class Profile extends React.Component{
             <div className='hr'></div><br/>
             <div className='pictureContainer'>
                
-            {this.state.pictures.map((picture)=>{ return <ProfileFeed key={picture.id} username={this.props.user.username} pictures={picture.attachment_url} id={picture.id} routerProps={this.props.routerProps} />})}
+            {this.state.pictures.map((picture)=>{ return <ProfileFeed key={picture.id} username={this.props.user.username} pictures={picture.attachment_url} id={picture.id} routerProps={this.props.routerProps} handleDeletePic={this.handleDeletePic} />})}
             
             </div>
              </div>

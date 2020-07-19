@@ -18,58 +18,11 @@ export default class NavBar extends React.Component{
 		color:'black'
 	}
 
-	//  getSongs=()=> {
-	// 	let div = document.querySelector('.work')
-	// let matchList = document.querySelector('.gradient-list');
-	// let text = document.querySelector('.line-1.anim-typewriter')
-	
-	// 	let search = document.querySelector('.search');
-	// 	search.addEventListener('input', function (e) {
-			
-	// 		const artistName = e.target.value;
-	// 		const searchText = e.target.value;
-	
-	// 		fetch(`http://localhost:3000/api/v1/artist?q=${artistName}`)
-	// 			.then((resp) => resp.json())
-	// 			.then((songs) => {
-	// 				if (e.target.value.length != 0) {
-	// 					let matches = songs.artists.items.filter((song) => {
-	// 						const regex = new RegExp(`^${searchText}`, 'gi');
-	
-	// 						return song.name.match(regex) || song.name.match(regex); //change later to search by title or album
-	// 					});
-	
-	// 					if (matches.length > 0) {
-	// 						const html = matches
-	// 							.map(
-	// 								(match) =>
-	// 									`
-	// 									<li class='name' data-id="${match.id}">${match.name}</li>
-	// 									`
-	// 							)
-	// 							.join('');
-	
-	// 						matchList.innerHTML = html;
-	// 						let firstSec = document.getElementById('first');
-	// 					   // div.appendChild(matchList)
-	// 						firstSec.appendChild(matchList)
-						   
-							
-	// 					}
-	// 					text.remove()
-	// 				} else {
-	// 					text.textContent = 'Search to browse albums '
-	// 					matches = [];
-	// 					matchList.innerHTML = '';
-	// 				}
-	// 			}); //end of last then
-	// 	}); //end of event listener
-	// } //end of function
+
 	
 
 	handleClick=(e)=>{
 		if (e.target.className === "link home" || "link upload" || "link logout" || "link profile" || "link login"){
-			console.log(e.target)
 			document.querySelector('.nav-links').style.left = '-100%'
 			document.getElementById('check').checked = false
 
@@ -95,7 +48,7 @@ export default class NavBar extends React.Component{
 		  if(this.props.users.length === 0){
 			return<ol className="usernameSearch"><li >No User Found</li></ol>
 		  }else{
-		return this.props.users.map((user)=><ol className="usernameSearch"><li key={user.id} >{user.username}</li></ol>)
+		return this.props.users.map((user)=><ol className="usernameSearch"><li onClick={()=>this.props.visitUserProfile(user.id)} key={user.id} >{user.username}</li></ol>)
 		  }
 	  }
 

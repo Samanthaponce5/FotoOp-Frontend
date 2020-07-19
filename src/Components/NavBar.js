@@ -48,7 +48,7 @@ export default class NavBar extends React.Component{
 		  if(this.props.users.length === 0){
 			return<ol className="usernameSearch"><li >No User Found</li></ol>
 		  }else{
-		return this.props.users.map((user)=><ol className="usernameSearch"><li onClick={()=>this.props.visitUserProfile(user.id)} key={user.id} >{user.username}</li></ol>)
+		return this.props.users.map((user)=><ol className="usernameSearch"><li onMouseDown={()=>this.props.visitUserProfile(user.id)} key={user.id} >{user.username}</li></ol>)
 		  }
 	  }
 

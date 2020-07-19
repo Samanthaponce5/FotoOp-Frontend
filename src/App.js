@@ -20,7 +20,7 @@ const history = createBrowserHistory({forceRefresh:true})
     user:{},
     form:'',
     users:[],
-    visitUser:[]
+    visitUser:{}
   }
 
   componentDidMount(){
@@ -108,15 +108,8 @@ const history = createBrowserHistory({forceRefresh:true})
   }
 
 visitUserProfile=(id)=>{
-  console.log('step one')
-  fetch(`http://localhost:3000/visit/${id}`)
-  .then((resp)=>resp.json())
-  .then((data)=>
-  console.log(data)
-    // this.setState({visitUser:data})
-)
-  
-  // history.push(`/visit/samantha`)
+    document.querySelector('.filterSearch').style.opacity = '0'    
+    history.push(`/visit/${id}`)
 
 }
 
@@ -135,7 +128,7 @@ visitUserProfile=(id)=>{
       {/* {this.state.user.username ?(
         <> */}
       <Route exact path='/home' render={(props)=>(<HomePage visitUserProfile={this.visitUserProfile}/>)}/> 
-      <Route exact path='/visit/:username' render={(props)=>(<VisitProfile {...this.state} />)}/> 
+      <Route exact path='/visit/:id' render={(props)=>(<VisitProfile routerProps={props} visitUser={this.state.visitUser} />)}/> 
 
       <Route exact path='/post' render={(props)=>(<Feed {...this.state} />)}/> 
       <Route exact path='/edit' render={(props)=>(<Edit {...this.state}  />)}/> 

@@ -4,7 +4,9 @@ import ProfileFeed from './ProfileFeed'
 class VisitProfile  extends React.Component{
     state={
         user:[],
-        userPost:[]
+        userPost:[],
+        follower:[],
+        following:[]
     }
     componentDidMount(){
         fetch(`http://localhost:3000/visit/${this.props.routerProps.match.params.id}`)
@@ -15,12 +17,33 @@ class VisitProfile  extends React.Component{
   }
 )
     }
+//go back to the scema delete unecessary follows table
+    handleFollow=(e)=>{
+        let id = e.target.id
+        const token = localStorage.getItem("token")
+
+        fetch(`http://localhost:3000/follow/${id}`,{
+            method:'POST',
+            headers:{
+                "Authorization": `Bearer ${token}`,
+                'Content-Type':'application/json',
+                'Accept':'application/json'
+            },
+            body:JSON.stringify({
+                followee_id:id,
+                follower_id:this.props.currentUser.id
+            })
+        })
+        .then((resp)=>resp.json())
+        .then((data)=>console.log(data))
+        .catch((err)=>console.log(err))
+    }
     render(){
         // console.log(this.props.routerProps.history)
         return(
             <div className='profileContainer'>
                 <div className='bioSection'>
-        <ul className='username'> <li><h1>{this.state.user.username}</h1></li> <li>{this.state.user.id === this.props.currentUser.id ? <button onClick={this.handleClick} className='editButton'>Edit</button> : <button onClick={this.handleClick} className='editButton'>Follow</button>}</li></ul>
+        <ul className='username'> <li><h1>{this.state.user.username}</h1></li> <li>{this.state.user.id === this.props.currentUser.id ? <button onClick={this.handleClick} className='editButton'>Edit</button> : <button onClick={this.handleFollow} id={this.state.user.id} className='editButton'>Follow</button>}</li></ul>
 
 
             <ul className='stats'>

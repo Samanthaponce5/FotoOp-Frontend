@@ -24,7 +24,13 @@ export default class Home extends React.Component{
   }
   
   loadPictures=()=> {
-    fetch(`${ApiHost}/pictures.json`)
+    const token = localStorage.getItem("token")
+
+    fetch(`${ApiHost}/pictures.json`,{
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
       .then((response) => response.json())
       .then((pictures) =>
         this.setState({

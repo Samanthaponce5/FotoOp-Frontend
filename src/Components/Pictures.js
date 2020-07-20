@@ -16,7 +16,6 @@ class Pictures extends React.Component {
 
 
 componentDidMount() {
-  this.loadPictures()
 }
 
 loadPictures=()=> {
@@ -85,7 +84,7 @@ render() {
         document.querySelector('.form-control-file').value =''
     }
 
-  if (this.state.loading) return null
+  // if (this.state.loading) return null
 
   return(
     <div className="pictures_container">
@@ -96,21 +95,14 @@ render() {
             <div className="form-group">
               <label htmlFor="file_upload">Upload Picture</label>
               <input type="file" className="form-control-file" id="file_upload" onChange={handleFileInputChange} />
+              <input type='text' value='' />
               <button type='submit'>Submit</button>
             </div>
           </form>
         </div>
       </div>
 
-      {/* {this.pictureRows().map((pictureRow, rowIndex) =>
-        <div key={`picture_row_${rowIndex}`} className="row">
-          {pictureRow.map((picture, columnIndex) =>
-            <div key={`picture_row_${rowIndex}_col_${columnIndex}`} className="col-sm-3">
-              <img className='feedImg' data-id={picture.id} src={`${ApiHost}${picture.attachment_url}`} />
-            </div>
-          )}
-        </div>
-      )} */}
+      
     </div>
   )
 }

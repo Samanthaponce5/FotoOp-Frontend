@@ -58,6 +58,7 @@ const history = createBrowserHistory({forceRefresh:true})
     fetch('http://localhost:3000/users')
     .then((resp)=>resp.json())
     .then((data)=>{
+      
       // return data.map((user)=><ol className="usernameSearch"><li >{user.username}</li></ol>)
       if (inputval.length !== 0) {
         					matches = data.filter((users) => {

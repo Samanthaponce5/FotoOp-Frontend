@@ -80,7 +80,7 @@ export default class Profile extends React.Component{
             <div className='hr'></div><br/>
             <div className='pictureContainer'>
                {this.state.pictures.length === 0 ? <img src={require('../img/NoPosts.png')}/>:
-            this.state.pictures.map((picture)=>{ return <ProfileFeed key={picture.id} username={this.props.user.username} pictures={picture.attachment_url} id={picture.id} routerProps={this.props.routerProps} handleDeletePic={this.handleDeletePic} />})
+            this.state.pictures.map((picture)=>{ return <ProfileFeed key={picture.id} username={this.props.user.username} pictures={picture.attachment_url} id={picture.id} routerProps={this.props.routerProps} handleDeletePic={this.handleDeletePic} currentUser={this.props.currentUser} />})
             }
             </div>
              </div>

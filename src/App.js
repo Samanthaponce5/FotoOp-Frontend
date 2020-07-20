@@ -117,6 +117,7 @@ visitUserProfile=(id)=>{
  
 
   render(){
+    console.log(this.state.user)
     return(
      <BrowserRouter >
      
@@ -128,11 +129,11 @@ visitUserProfile=(id)=>{
       {/* {this.state.user.username ?(
         <> */}
       <Route exact path='/home' render={(props)=>(<HomePage visitUserProfile={this.visitUserProfile}/>)}/> 
-      <Route exact path='/visit/:id' render={(props)=>(<VisitProfile routerProps={props} visitUser={this.state.visitUser} />)}/> 
+      <Route exact path='/visit/:id' render={(props)=>(<VisitProfile routerProps={props} visitUser={this.state.visitUser} currentUser={this.state.user}/>)}/> 
 
       <Route exact path='/post' render={(props)=>(<Feed {...this.state} />)}/> 
       <Route exact path='/edit' render={(props)=>(<Edit {...this.state}  />)}/> 
-      <Route exact path='/profile' render={(props)=>(<Profile {...this.state}  routerProps={props} />)}/>
+      <Route exact path='/profile' render={(props)=>(<Profile {...this.state} currentUser={this.state.user} routerProps={props} />)}/>
 
   
 

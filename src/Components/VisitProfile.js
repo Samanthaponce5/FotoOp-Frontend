@@ -20,7 +20,7 @@ class VisitProfile  extends React.Component{
         return(
             <div className='profileContainer'>
                 <div className='bioSection'>
-       <ul className='username'> <li><h1>{this.state.user.username}</h1></li> <li><button onClick={this.handleClick} className='editButton'>Edit Profile</button></li></ul>
+        <ul className='username'> <li><h1>{this.state.user.username}</h1></li> <li>{this.state.user.id === this.props.currentUser.id ? <button onClick={this.handleClick} className='editButton'>Edit</button> : <button onClick={this.handleClick} className='editButton'>Follow</button>}</li></ul>
 
 
             <ul className='stats'>
@@ -38,7 +38,7 @@ class VisitProfile  extends React.Component{
             <div className='hr'></div><br/>
             <div className='pictureContainer'>
             {this.state.userPost.length === 0 ? <img src={require('../img/NoPosts.png')}/>:
-            this.state.userPost.map((picture)=>{ return <ProfileFeed key={picture.id} username={this.state.user.username} pictures={picture.attachment_url} id={picture.id} routerProps={this.props.routerProps} handleDeletePic={this.handleDeletePic} />})
+            this.state.userPost.map((picture)=>{ return <ProfileFeed key={picture.id} username={this.state.user.username} pictures={picture.attachment_url} id={picture.id} routerProps={this.props.routerProps} handleDeletePic={this.handleDeletePic} currentUser={this.props.currentUser} />})
             }
             </div>
              </div>

@@ -29,9 +29,11 @@ export default class ProfileFeed extends React.Component{
     
       modal.style.display = "block";
       const  modalImg = document.getElementById("img01");
-      dots.id = data.id
-      threedots.id = data.id
       modalImg.src =  `${ApiHost}${data.attachment_url}`;
+      if(dots&&threedots){
+        dots.id = data.id
+        threedots.id = data.id
+      }
    
     })
     
@@ -59,7 +61,8 @@ export default class ProfileFeed extends React.Component{
 
     render(){
       // Get the modal
-      // console.log(this.state.picture)
+      console.log('current user',this.props.currentUser.username)
+      console.log('user', this.props.username)
         return(
           <>
             <span className='imagecontainer'>             
@@ -75,7 +78,7 @@ export default class ProfileFeed extends React.Component{
   <img src={`${ApiHost}${this.state.picture.attachment_url}`} className="modal-content" id="img01" alt='upload'/>
   <div className='comments'>
     
-        <div className='tophr'><div className='usernameModal'>{this.props.username}</div>  <div className='threedots'  onClick={this.props.handleDeletePic}><BsThreeDots className='dots'  size={15}/></div></div>
+        <div className='tophr'><div className='usernameModal'>{this.props.username}</div>  {this.props.currentUser.username === this.props.username?<div className='threedots'  onClick={this.props.handleDeletePic}><BsThreeDots className='dots'  size={15}/></div>:null }</div>
          <div className='centerComment'>Super long comment to test the scrollability Lorem ipsum dolor sit amet,
            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore e
            t dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation

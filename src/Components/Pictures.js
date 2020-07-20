@@ -82,6 +82,7 @@ render() {
             pictures: pictures
           })
         })
+        document.querySelector('.form-control-file').value =''
     }
 
   if (this.state.loading) return null

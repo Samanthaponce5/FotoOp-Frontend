@@ -34,7 +34,6 @@ const history = createBrowserHistory({forceRefresh:true})
       .then(resp => resp.json())
       .then(data => {
         this.setState({user:data})
-        // console.log(data)
       })
     }
 
@@ -50,15 +49,16 @@ const history = createBrowserHistory({forceRefresh:true})
           const inputval = e.target.value
           let matches;
     if(e.target.value != 0){
-      document.querySelector('.filterSearch').style.opacity = '1'
+      document.querySelector('.filterSearch').style.display = 'block'
+
     }else{
-      document.querySelector('.filterSearch').style.opacity = '0'
+      document.querySelector('.filterSearch').style.display = 'none'
     }
     fetch('http://localhost:3000/users')
     .then((resp)=>resp.json())
     .then((data)=>{
       // return data.map((user)=><ol className="usernameSearch"><li >{user.username}</li></ol>)
-      if (inputval.length != 0) {
+      if (inputval.length !== 0) {
         					matches = data.filter((users) => {
         						const regex = new RegExp(`^${searchText}`, 'gi');
         
@@ -116,7 +116,6 @@ visitUserProfile=(id)=>{
  
 
   render(){
-    // console.log(this.state.user)
     return(
      <BrowserRouter >
      

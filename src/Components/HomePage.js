@@ -27,7 +27,6 @@ export default class Home extends React.Component{
     fetch(`${ApiHost}/pictures.json`)
       .then((response) => response.json())
       .then((pictures) =>
-    //   console.log(pictures)
         this.setState({
           pictures: pictures,
           loading: false
@@ -58,7 +57,7 @@ export default class Home extends React.Component{
   getUser=(pic)=>{
      return this.state.user.map((u)=>{
           if(u.id === pic.user_id){
-              return <span onClick={()=>this.props.visitUserProfile(u.id)} id={u.id}>{u.username}</span> 
+              return <span onClick={()=>this.props.visitUserProfile(u.id)} key={u.id} id={u.id}>{u.username}</span> 
           }
       })
   }
@@ -87,7 +86,7 @@ export default class Home extends React.Component{
           {this.state.pictures.map((picture) =>
             <div key={picture.id} className='homeimgdiv'>
                 <div className='tophomeimg'><h3 className='names'  > {this.getUser(picture)}</h3></div>
-              <img className='homefeedImg' data-id={picture.id} src={`${ApiHost}${picture.attachment_url}`} />
+              <img className='homefeedImg' data-id={picture.id} src={`${ApiHost}${picture.attachment_url}`} alt='upload'/>
               <div className='bottomhomeimg'>
               <ul className='likesandcomments'>
         {this.state.like ? <li style={{color: 'red'}} onClick={this.handleLike}><IoIosHeart size={30}/></li> : <li  onClick={this.handleLike} ><IoIosHeartEmpty size={30}/> </li> }<li><FaRegComment size={25}/> </li></ul>

@@ -58,7 +58,7 @@ export default class Profile extends React.Component{
         }
 
     render(){
-        // console.log(this.props.routerProps.history)
+      
         return(
             <div className='profileContainer'>
                 <div className='bioSection'>
@@ -66,7 +66,7 @@ export default class Profile extends React.Component{
 
 
             <ul className='stats'>
-             <li><b>50</b> posts</li>
+             <li><b>{this.state.pictures.length}</b> posts</li>
              <li><b>215</b> followers</li> 
              <li><b>147</b> following</li>
             </ul>
@@ -79,9 +79,9 @@ export default class Profile extends React.Component{
          </div>
             <div className='hr'></div><br/>
             <div className='pictureContainer'>
-               
-            {this.state.pictures.map((picture)=>{ return <ProfileFeed key={picture.id} username={this.props.user.username} pictures={picture.attachment_url} id={picture.id} routerProps={this.props.routerProps} handleDeletePic={this.handleDeletePic} />})}
-            
+               {this.state.pictures.length === 0 ? <img src={require('../img/NoPosts.png')}/>:
+            this.state.pictures.map((picture)=>{ return <ProfileFeed key={picture.id} username={this.props.user.username} pictures={picture.attachment_url} id={picture.id} routerProps={this.props.routerProps} handleDeletePic={this.handleDeletePic} />})
+            }
             </div>
              </div>
         )

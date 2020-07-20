@@ -4,7 +4,7 @@ import '../Style/App.css';
 import { faCodeBranch } from '@fortawesome/free-solid-svg-icons';
 
 function Feed(props) {
-  console.log(props.user)
+  // console.log(props.user)
   return (
     <div className="container">
       <Pictures user={props.user.id}/>

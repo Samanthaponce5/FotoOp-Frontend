@@ -18,7 +18,6 @@ export default class ProfileFeed extends React.Component{
   // Get the image and insert it inside the modal - use its "alt" text as a caption
  img = document.getElementById("feedImg");
    handlesimgClick=(e)=>{
-     console.log(e.target)
      fetch(`http://localhost:3000/pictures/${e.target.id}`)
      .then((resp)=>resp.json())
      .then(data => {
@@ -38,10 +37,7 @@ export default class ProfileFeed extends React.Component{
     
 
   }
-  handlesimgClicks=(e)=>{
-    
 
-  }
   
   // Get the <span> element that closes the modal
  span = document.getElementsByClassName("close")[0];
@@ -67,7 +63,7 @@ export default class ProfileFeed extends React.Component{
         return(
           <>
             <span className='imagecontainer'>             
-       <img className='feedImg' id={this.props.id} src={`${ApiHost}${this.props.pictures}`} onClick={this.handlesimgClicks} onMouseDown={this.handlesimgClick}/>
+       <img className='feedImg' id={this.props.id} src={`${ApiHost}${this.props.pictures}`}  onMouseDown={this.handlesimgClick} alt='upload'/>
        <div className="middle">
         <ul className="text"><li><IoIosHeart size={25}/> <span className='number'>50</span></li> <li><FaComment size={25}/><span className='number'> 10 </span></li></ul>
         </div>
@@ -76,7 +72,7 @@ export default class ProfileFeed extends React.Component{
         <div id="myModal" className="modal" >
   <span onClick={this.handlespanClick} className="close">&times;</span>
   <div className='background'>
-  <img src={`${ApiHost}${this.state.picture.attachment_url}`} className="modal-content" id="img01"/>
+  <img src={`${ApiHost}${this.state.picture.attachment_url}`} className="modal-content" id="img01" alt='upload'/>
   <div className='comments'>
     
         <div className='tophr'><div className='usernameModal'>{this.props.username}</div>  <div className='threedots'  onClick={this.props.handleDeletePic}><BsThreeDots className='dots'  size={15}/></div></div>

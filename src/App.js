@@ -51,6 +51,7 @@ const history = createBrowserHistory({forceRefresh:true})
     if(e.target.value != 0){
       document.querySelector('.filterSearch').style.display = 'block'
 
+      
     }else{
       document.querySelector('.filterSearch').style.display = 'none'
     }

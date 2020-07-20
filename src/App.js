@@ -114,6 +114,18 @@ visitUserProfile=(id)=>{
     history.push(`/visit/${id}`)
 
 }
+  profileFetch=()=>{
+    const token = localStorage.getItem("token")
+    if(token){
+      fetch(`http://localhost:3000/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(resp => resp.json())
+      .then(()=> history.push(`/profile`))
+  }
+}
 
  
 
@@ -133,8 +145,8 @@ visitUserProfile=(id)=>{
       <Route exact path='/visit/:id' render={(props)=>(<VisitProfile routerProps={props} visitUser={this.state.visitUser} currentUser={this.state.user}/>)}/> 
 
       <Route exact path='/post' render={(props)=>(<Feed {...this.state} />)}/> 
-      <Route exact path='/edit' render={(props)=>(<Edit {...this.state}  />)}/> 
-      <Route exact path='/profile' render={(props)=>(<Profile {...this.state} currentUser={this.state.user} routerProps={props} />)}/>
+      <Route exact path='/edit' render={(props)=>(<Edit {...this.state} currentUser={this.state.user} profileFetch={this.profileFetch}/>)}/> 
+      <Route exact path='/profile' render={(props)=>(<Profile {...this.state} currentUser={this.state.user} routerProps={props}  />)}/>
 
   
 

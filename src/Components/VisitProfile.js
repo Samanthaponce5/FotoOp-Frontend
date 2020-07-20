@@ -9,13 +9,17 @@ class VisitProfile  extends React.Component{
         following:[]
     }
     componentDidMount(){
-        fetch(`http://localhost:3000/visit/${this.props.routerProps.match.params.id}`)
-  .then((resp)=>resp.json())
-  .then((data)=>{ 
-    this.setState({user:data.user, userPost:data.posts })
+        this.fetchUsers()
+    }
 
-  }
-)
+    fetchUsers=()=>{
+        fetch(`http://localhost:3000/visit/${this.props.routerProps.match.params.id}`)
+        .then((resp)=>resp.json())
+        .then((data)=>{ 
+          this.setState({user:data.user, userPost:data.posts,follower:data.followers, following:data.followees })
+      
+        }
+      )
     }
 //go back to the scema delete unecessary follows table
     handleFollow=(e)=>{
@@ -35,8 +39,8 @@ class VisitProfile  extends React.Component{
             })
         })
         .then((resp)=>resp.json())
-        .then((data)=>console.log(data))
-        .catch((err)=>console.log(err))
+        .then(()=>this.fetchUsers())
+        
     }
     render(){
         // console.log(this.props.routerProps.history)
@@ -48,14 +52,13 @@ class VisitProfile  extends React.Component{
 
             <ul className='stats'>
              <li><b>{this.state.userPost.length}</b> posts</li>
-             <li><b>215</b> followers</li> 
-             <li><b>147</b> following</li>
+        <li><b>{this.state.follower.length}</b> followers</li> 
+             <li><b>{this.state.following.length}</b> following</li>
             </ul>
-            <div className='name'> Samantha Ponce</div>
+            <div className='name'> {this.state.user.firstname} {this.state.user.laststname}</div>
             <div className='bio'>
-              ✝️💙 God's timing is always perfect💙✝️<br/>
-              👩‍💻Software Engineer<br/>
-              📷🌎✈🐶🐶</div>
+            {this.state.user.bio}
+              </div>
 
          </div>
             <div className='hr'></div><br/>

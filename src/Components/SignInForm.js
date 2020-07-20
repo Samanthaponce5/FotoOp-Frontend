@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 function SignInForm(props) {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    const [name, setName] = useState("")
+    const [firstname, setfirstName] = useState("")
+    const [lastname, setlastName] = useState("")
+
     const [email, setEmail] = useState("")
 
 
@@ -15,6 +17,16 @@ function SignInForm(props) {
 
     const handlePasswordChange = (evt) => {
         setPassword(evt.target.value)
+    }
+
+    const handleFirstNameChange = (evt) => {
+        setfirstName(evt.target.value)
+    }
+    const handleLastNameChange = (evt) => {
+        setlastName(evt.target.value)
+    }
+    const handleEmailChange = (evt) => {
+        setEmail(evt.target.value)
     }
 
     const handleSubmit = (evt) => {
@@ -27,7 +39,10 @@ function SignInForm(props) {
             },
             body: JSON.stringify({
                 username,
-                password
+                password,
+                firstname,
+                lastname,
+                email
             })
         })
         .then(resp => resp.json())
@@ -37,6 +52,9 @@ function SignInForm(props) {
         })
         setUsername("")
         setPassword("")
+        setEmail("")
+        setfirstName("")
+        setlastName("")
     }
     const formDivStyle = {
         position:'absolute',
@@ -52,8 +70,9 @@ function SignInForm(props) {
         <div style={formDivStyle}>
             <h1>Sign Up</h1>
             <form className="ui form" onSubmit={handleSubmit}>
-            <input className='name' placeholder='Name' type='text' name='name' value={name} onChange={"handleOnChange"} /><br />
-            <input className='email' type='text' placeholder='Email' name='email' value={email} onChange={"handleOnChange"} /><br />
+            <input className='name' placeholder='First Name' type='text' name='firstname' value={firstname} onChange={handleFirstNameChange} /><br />
+            <input className='name' placeholder='Last Name' type='text' name='lastname' value={lastname} onChange={handleLastNameChange} /><br />
+            <input className='email' type='text' placeholder='Email' name='email' value={email} onChange={handleEmailChange} /><br />
 
                 <div className="field">
                     <label>Username</label>
@@ -63,13 +82,11 @@ function SignInForm(props) {
                     <label>Password</label>
                     <input value={password} onChange={handlePasswordChange} type="password" placeholder="password"/>
                 </div>
-                <input className='filebtn' type='file' name='image' onChange={'handleOnChange'} /><br />
+                <button type='submit'>Submit</button>
 
-                <button className="ui button" type="submit">Submit</button>
             </form>
             <Link to="/login">Log in</Link>
             <button onClick={props.handleAuthClick} className="ui button">Access Authorized Route</button>
-
         </div>
     )
 }

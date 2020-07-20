@@ -98,19 +98,7 @@ export default class Home extends React.Component{
         {this.state.like ? <li style={{color: 'red'}} onClick={this.handleLike}><IoIosHeart size={30}/></li> : <li  onClick={this.handleLike} ><IoIosHeartEmpty size={30}/> </li> }<li><FaRegComment size={25}/> </li></ul>
         <div className='likers'>Liked by 49 others  </div>
 
-        <div className='homecenterComment'>Super long comment to test the scrollability Lorem ipsum dolor sit amet,
-           consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore e
-           t dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-             dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
-             nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum.
-              t dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-             dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
-             nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-             t aliquip ex ea commodo consequat. Duis aute irure
-             dolor in reprehenderit in voluptate velit esse 
+        <div className='homecenterComment'>
               </div> 
 
             <div className='homedate'> MAY 30</div>

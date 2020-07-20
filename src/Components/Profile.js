@@ -5,10 +5,16 @@ import {BsPerson} from 'react-icons/bs';
 export default class Profile extends React.Component{
    
     state={
-        pictures:[]
+        pictures:[],
+        follower:[],
+        following:[]
     }
 
     componentDidMount(){
+      this.fetchProfile()
+      }
+
+      fetchProfile=()=>{
         const token = localStorage.getItem("token")
         if(token){
           fetch(`http://localhost:3000/profile`, {
@@ -18,8 +24,8 @@ export default class Profile extends React.Component{
           })
           .then(resp => resp.json())
           .then(data => {
-            this.setState({pictures:data.posts})
-            // console.log(data.posts)
+            this.setState({pictures:data.posts, follower:data.followers, following:data.followees})
+            // console.log(data)
           })
         }
       }
@@ -67,14 +73,13 @@ export default class Profile extends React.Component{
 
             <ul className='stats'>
              <li><b>{this.state.pictures.length}</b> posts</li>
-             <li><b>215</b> followers</li> 
-             <li><b>147</b> following</li>
+             <li><b>{this.state.follower.length}</b> followers</li> 
+             <li><b>{this.state.following.length}</b> following</li>
             </ul>
-            <div className='name'> Samantha Ponce</div>
+            <div className='name'> {this.props.user.firstname} {this.props.user.lastname}</div>
             <div className='bio'>
-              ✝️💙 God's timing is always perfect💙✝️<br/>
-              👩‍💻Software Engineer<br/>
-              📷🌎✈🐶🐶</div>
+              {this.props.user.bio}
+              </div>
 
          </div>
             <div className='hr'></div><br/>

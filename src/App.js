@@ -127,6 +127,7 @@ visitUserProfile=(id)=>{
   }
 }
 
+
  
 
   render(){
@@ -141,8 +142,8 @@ visitUserProfile=(id)=>{
       <Route exact path='/signup' render={(props)=>(<SignInForm handleLogin={this.handleLogin} handleAuthClick={this.handleAuthClick}/>)}/> 
       {/* {this.state.user.username ?(
         <> */}
-      <Route exact path='/home' render={(props)=>(<HomePage visitUserProfile={this.visitUserProfile}/>)}/> 
-      <Route exact path='/visit/:id' render={(props)=>(<VisitProfile routerProps={props} visitUser={this.state.visitUser} currentUser={this.state.user}/>)}/> 
+      <Route exact path='/home' render={(props)=>(<HomePage currentUser={this.state.user} visitUserProfile={this.visitUserProfile}/>)}  /> 
+      <Route exact path='/visit/:id' render={(props)=>(<VisitProfile routerProps={props} visitUser={this.state.visitUser} currentUser={this.state.user} />)}/> 
 
       <Route exact path='/post' render={(props)=>(<Feed {...this.state} />)}/> 
       <Route exact path='/edit' render={(props)=>(<Edit {...this.state} currentUser={this.state.user} profileFetch={this.profileFetch}/>)}/> 

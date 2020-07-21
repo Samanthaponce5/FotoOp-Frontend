@@ -14,7 +14,9 @@ export default class Home extends React.Component{
       loading: true,
       user_id:'',
       like:false,
-      user:[]
+      user:[],
+      comment:'',
+      comments:[]
     }
   
   
@@ -34,7 +36,8 @@ export default class Home extends React.Component{
       .then((response) => response.json())
       .then((pictures) =>
         this.setState({
-          pictures: pictures,
+          pictures: pictures.posts,
+          comments:pictures.comments,
           loading: false
         })
   
@@ -68,24 +71,38 @@ export default class Home extends React.Component{
       })
   }
   
-//   pictureRows() {
-//     let rows = []
-//     let row = []
-//     this.state.pictures.forEach((picture) => {
-//       row.push(picture)
-//       if (row.length === this.state.number_columns) {
-//         rows.push(row)
-//         row = []
-//       }
-//     })
-//     if (row.length > 0) {
-//       rows.push(row)
-//     }
-//     return rows
-//   }
+  handleOnChange=(e)=>{
+    let {value, name} = e.target
+    this.setState({[name]:value})
+  }
+
+  commentFetch=(e,post)=>{
+    e.preventDefault()
+    const token = localStorage.getItem("token")
+    if(token && this.state.comment.length > 0){
+    fetch('http://localhost:3000/comments',{
+      method:'POST',
+      headers:{
+        Authorization: `Bearer ${token}`,
+        'Content-Type':'application/json',
+        'Accept':'application/json'
+      },
+      body:JSON.stringify({
+        user_id:this.props.currentUser.id,
+        picture_id:post,
+        comment:this.state.comment
+      })
+    })
+    .then((resp)=>resp.json())
+    .then(()=> this.loadPictures())
+    this.setState({comment:''})
+   }
+
+  }
 
 
     render(){
+      console.log(this.state.comment)
         return(
             <>
              <div>
@@ -99,10 +116,14 @@ export default class Home extends React.Component{
         <div className='likers'>Liked by 49 others  </div>
 
         <div className='homecenterComment'>
+          <ul>
+          {this.state.comments.map((co)=>{return co.map((c)=>{if(c.picture_id===picture.id){return <li>{c.comment}</li>}})})}
+          </ul>
               </div> 
 
             <div className='homedate'> MAY 30</div>
-                  <input className='homeimginput' type='text' placeholder='         Add a comment...'/>
+
+                 <form onSubmit={(e)=>this.commentFetch(e,picture.id)}> <input name='comment' value={this.state.comment} id={picture.id} onChange={this.handleOnChange} className='homeimginput' type='text' placeholder='         Add a comment...'/><button type='submit' className='homepost'>Post</button></form>
               </div>
             </div>
           )}

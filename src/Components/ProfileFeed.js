@@ -13,6 +13,7 @@ export default class ProfileFeed extends React.Component{
 
     state={
       picture:{},
+      comments:[],
       like:false
     }
   // Get the image and insert it inside the modal - use its "alt" text as a caption
@@ -21,7 +22,7 @@ export default class ProfileFeed extends React.Component{
      fetch(`http://localhost:3000/pictures/${e.target.id}`)
      .then((resp)=>resp.json())
      .then(data => {
-      this.setState({picture:data})
+      this.setState({picture:data.picture, comments:data.comments})
       // console.log(data)
       const dots = document.querySelector('.dots')
       const threedots = document.querySelector('.threedots')
@@ -29,10 +30,10 @@ export default class ProfileFeed extends React.Component{
     
       modal.style.display = "block";
       const  modalImg = document.getElementById("img01");
-      modalImg.src =  `${ApiHost}${data.attachment_url}`;
+      modalImg.src =  `${ApiHost}${data.picture.attachment_url}`;
       if(dots&&threedots){
-        dots.id = data.id
-        threedots.id = data.id
+         dots.id = data.id
+      threedots.id = data.id
       }
    
     })
@@ -57,12 +58,14 @@ export default class ProfileFeed extends React.Component{
  //li == the id like only that one heart
     this.setState({like:!this.state.like})
   }
-
+getComment=()=>{
+  return this.state.comments.map((c)=>{return <li>{c.comment}</li>})
+}
 
     render(){
       // Get the modal
-      console.log('current user',this.props.currentUser.username)
-      console.log('user', this.props.username)
+      // console.log('comments',this.state.comments)
+     
         return(
           <>
             <span className='imagecontainer'>             
@@ -79,19 +82,11 @@ export default class ProfileFeed extends React.Component{
   <div className='comments'>
     
         <div className='tophr'><div className='usernameModal'>{this.props.username}</div>  {this.props.currentUser.username === this.props.username?<div className='threedots'  onClick={this.props.handleDeletePic}><BsThreeDots className='dots'  size={15}/></div>:null }</div>
-         <div className='centerComment'>Super long comment to test the scrollability Lorem ipsum dolor sit amet,
-           consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore e
-           t dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-             dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
-             nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum.
-              t dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-             dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
-             nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-             t aliquip ex ea commodo consequat. Duis aute irure
-             dolor in reprehenderit in voluptate velit esse 
+         <div className='centerComment'>
+           <ul>
+             
+           {this.getComment()}
+           </ul>
               </div> 
           <div className='bottomhr'><ul className='likesandcomments'>
         {this.state.like ? <li style={{color: 'red'}} onClick={this.handleLike}><IoIosHeart size={30}/></li> : <li  onClick={this.handleLike} ><IoIosHeartEmpty size={30}/> </li> }<li><FaRegComment size={25}/> </li></ul>

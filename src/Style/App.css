@@ -353,7 +353,6 @@ ul.username li {
 	overflow: scroll;
 }
 .centerComment {
-	/* border: solid red; */
 	height: 240px;
 	overflow: scroll;
 }
@@ -387,7 +386,9 @@ ul.username li {
 	border-top: solid 0.1px rgba(var(--b6a, 219, 219, 219), 0.8);
 	border-bottom: none;
 }
-
+#comment{
+border: solid black;
+}
 .threedots{
 position: relative;
 float: right;

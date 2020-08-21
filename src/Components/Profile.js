@@ -25,7 +25,7 @@ export default class Profile extends React.Component{
           .then(resp => resp.json())
           .then(data => {
             this.setState({pictures:data.posts, follower:data.followers, following:data.followees})
-            // console.log(data)
+            // console.log(data.comments)
           })
         }
       }

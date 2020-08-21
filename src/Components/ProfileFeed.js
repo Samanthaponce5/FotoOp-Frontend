@@ -27,7 +27,7 @@ export default class ProfileFeed extends React.Component{
       const dots = document.querySelector('.dots')
       const threedots = document.querySelector('.threedots')
       const modal = document.getElementById("myModal");
-    
+
       modal.style.display = "block";
       const  modalImg = document.getElementById("img01");
       modalImg.src =  `${ApiHost}${data.picture.attachment_url}`;
@@ -59,17 +59,19 @@ export default class ProfileFeed extends React.Component{
     this.setState({like:!this.state.like})
   }
 getComment=()=>{
+  // Li wont show up maybe do an if statement like you dod in the home?
+  //it console.logs out correctly when click on image ????
   return this.state.comments.map((c)=>{return <li>{c.comment}</li>})
 }
 
     render(){
       // Get the modal
-      // console.log('comments',this.state.comments)
+      // console.log('comments!',this.state.comments)
      
         return(
           <>
             <span className='imagecontainer'>             
-       <img className='feedImg' id={this.props.id} src={`${ApiHost}${this.props.pictures}`}  onMouseDown={this.handlesimgClick} alt='upload'/>
+       <img className='feedImg' id={this.props.id} src={`${ApiHost}${this.props.pictures}`} onClick={this.handlesimgClick}  onMouseDown={this.handlesimgClick} alt='upload'/>
        <div className="middle">
         <ul className="text"><li><IoIosHeart size={25}/> <span className='number'>50</span></li> <li><FaComment size={25}/><span className='number'> 10 </span></li></ul>
         </div>
@@ -83,9 +85,10 @@ getComment=()=>{
     
         <div className='tophr'><div className='usernameModal'>{this.props.username}</div>  {this.props.currentUser.username === this.props.username?<div className='threedots'  onClick={this.props.handleDeletePic}><BsThreeDots className='dots'  size={15}/></div>:null }</div>
          <div className='centerComment'>
-           <ul>
-             
-           {this.getComment()}
+
+           <ul id='co'>
+
+        {this.state.comments.map(c=> <li id='comment' key={c.id}>{c.comment}</li>)}
            </ul>
               </div> 
           <div className='bottomhr'><ul className='likesandcomments'>

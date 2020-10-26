@@ -34,9 +34,8 @@ const history = createBrowserHistory({forceRefresh:true})
       .then(resp => resp.json())
       .then(data => {
         this.setState({user:data})
-      })
-    }
-
+        })
+     }
   }
 
  
@@ -125,6 +124,7 @@ visitUserProfile=(id)=>{
       .then(resp => resp.json())
       .then(()=> history.push(`/profile`))
   }
+  
 }
 
 

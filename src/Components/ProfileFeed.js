@@ -7,8 +7,11 @@ import {IoIosHeart} from 'react-icons/io';
 import {IoIosHeartEmpty} from 'react-icons/io';
 import {BsThreeDots} from 'react-icons/bs';
 
+import {connect} from 'react-redux'
+import {getCommentsAction} from '../actions'
 
-export default class ProfileFeed extends React.Component{
+
+ class ProfileFeed extends React.Component{
 
 
     state={
@@ -19,11 +22,15 @@ export default class ProfileFeed extends React.Component{
   // Get the image and insert it inside the modal - use its "alt" text as a caption
  img = document.getElementById("feedImg");
    handlesimgClick=(e)=>{
+
+    this.props.getCommentsAction(e.target.id)
+
+     console.log('the pic',e.target.id)
      fetch(`http://localhost:3000/pictures/${e.target.id}`)
      .then((resp)=>resp.json())
      .then(data => {
       this.setState({picture:data.picture, comments:data.comments})
-      // console.log(data)
+      // console.log('the data',data.comments)
       const dots = document.querySelector('.dots')
       const threedots = document.querySelector('.threedots')
       const modal = document.getElementById("myModal");
@@ -46,10 +53,12 @@ export default class ProfileFeed extends React.Component{
  span = document.getElementsByClassName("close")[0];
   
   // When the user clicks on <span> (x), close the modal
-   handlespanClick = function() { 
+   handlespanClick = ()=> { 
+     let {comments} = this.state
    const modal = document.getElementById("myModal");
 
     modal.style.display = "none";
+    this.setState({comments:[]})
   }
 
   handleLike=(e)=>{
@@ -58,15 +67,18 @@ export default class ProfileFeed extends React.Component{
  //li == the id like only that one heart
     this.setState({like:!this.state.like})
   }
-getComment=()=>{
-  // Li wont show up maybe do an if statement like you dod in the home?
-  //it console.logs out correctly when click on image ????
-  return this.state.comments.map((c)=>{return <li>{c.comment}</li>})
-}
+// getComment=()=>{
+//   // Li wont show up maybe do an if statement like you dod in the home?
+//   //it console.logs out correctly when click on image ????
+//   // console.log('comments click!',this.state.comments)
+//   return this.state.comments.map(c=>{
+//     return( <li>{c.comment}</li>)
+//   })
+// }
 
     render(){
       // Get the modal
-      // console.log('comments!',this.state.comments)
+      console.log('ALLPROPS',this.props)
      
         return(
           <>
@@ -88,7 +100,7 @@ getComment=()=>{
 
            <ul id='co'>
 
-        {this.state.comments.map(c=> <li id='comment' key={c.id}>{c.comment}</li>)}
+        {this.props.commentsPic.acomment?this.props.commentsPic.acomment.map((c)=><li>{c.comment}</li>):null}
            </ul>
               </div> 
           <div className='bottomhr'><ul className='likesandcomments'>
@@ -104,3 +116,13 @@ getComment=()=>{
       )
     }
 }
+
+
+const mapStateToProps=(state,ownProps)=>{
+  return{
+       commentsPic:state.acomments
+      }
+
+}
+
+export default connect(mapStateToProps,{getCommentsAction})(ProfileFeed)
